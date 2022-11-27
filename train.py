@@ -64,13 +64,10 @@ learning_rate = 1e-5
 # optimizer = torch.optim.SGD(my_model.parameters(), lr=learning_rate)
 # # betas参数可调
 optimizer = torch.optim.Adam(my_model.parameters(), lr=learning_rate, betas=(0.9, 0.99))
+
 # 训练集轮次
 epoch = 20
 
-train_loss_his = []
-train_totalaccuracy_his = []
-dev_totalloss_his = []
-dev_totalaccuracy_his = []
 start_time = time.time()
 
 # 开始训练
@@ -97,6 +94,7 @@ for i in range(last_epoch+1, epoch+last_epoch+1):
         # print(label_id.shape)
         # assert 0
 
+        # 计算交叉熵损失值
         loss = loss_fn(output, label_id)
         train_loss += loss.item()
         # 反向传播

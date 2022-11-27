@@ -37,5 +37,8 @@ class ClassifierModel(nn.Module):
         )
         # 为分类任务提取标记[CLS]的最后隐藏状态
         last_hidden_state_cls = bert_outputs[0][:, 0, :]
+        # 随机丢弃神经元，防止过拟合
+        last_hidden_state_cls = self.dropout_layer(last_hidden_state_cls)
+        # 分类
         out = self.obj_classifier(last_hidden_state_cls)
         return out
